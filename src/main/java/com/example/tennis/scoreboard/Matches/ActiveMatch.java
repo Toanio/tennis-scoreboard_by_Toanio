@@ -56,6 +56,7 @@ public class ActiveMatch {
             isTieBreak = false;
             player.incrementSets();
             checkMatchWinner(player);
+            resetPoints(player, opponent);
             resetGames(player, opponent);
             resetTieBreakPoints(player, opponent);
         }
