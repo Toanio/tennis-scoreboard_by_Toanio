@@ -16,10 +16,12 @@ public class MatchesService {
     private final PlayersService playersService;
     private final ConcurrentHashMap<UUID, ActiveMatch> matchSession = new ConcurrentHashMap<>();
     private final MatchMapper matchMapper;
+    private final MatchesRepository matchesRepository;
 
-    public MatchesService(PlayersService playersService, MatchMapper matchMapper) {
+    public MatchesService(PlayersService playersService, MatchMapper matchMapper, MatchesRepository matchesRepository) {
         this.playersService = playersService;
         this.matchMapper = matchMapper;
+        this.matchesRepository = matchesRepository;
     }
 
 
@@ -40,6 +42,17 @@ public class MatchesService {
     public MatchInfoDTO setPoint(UUID uuid, String name) {
         ActiveMatch match = matchSession.get(uuid);
         match.addPoint(name);
+        saveFinishMatch(uuid);
         return matchMapper.mapToMatchInfoDto(match);
+    }
+
+    public void saveFinishMatch(UUID uuid) {
+        ActiveMatch match = matchSession.get(uuid);
+        if (match.winnerName != null) {
+            Players players1 = playersService.findPlayerByName(match.getPlayer1().getName());
+            Players players2 = playersService.findPlayerByName(match.getPlayer2().getName());
+            matchesRepository.save(new Matches(players1.getId(), players2.getId(), match.winnerName));
+            matchSession.remove(uuid);
+        }
     }
 }
