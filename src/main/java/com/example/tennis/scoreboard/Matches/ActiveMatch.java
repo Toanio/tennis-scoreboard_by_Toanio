@@ -12,6 +12,10 @@ public class ActiveMatch {
     public ActiveMatch(ActivePlayer player1, ActivePlayer player2) {
         this.player1 = player1;
         this.player2 = player2;
+
+        if (player1.getGames() == 6 && player2.getGames() == 6) {
+            isTieBreak = true;
+        }
     }
 
     public void addPoint(String playerName) {
