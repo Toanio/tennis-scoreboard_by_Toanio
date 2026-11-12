@@ -32,4 +32,8 @@ public class PlayersService {
         //TODO: сделать экономичный поиск всех игроков
     }
 
+    public Players findPlayerByName(String name) {
+        return playersRepository.findByName(name);
+    }
+
 }
