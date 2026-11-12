@@ -14,11 +14,19 @@ public class Matches {
 
     Integer player2;
 
+    String winnerName;
 
-    public Matches(Integer id, Integer player1, Integer player2) {
+    public Matches(Integer id, Integer player1, Integer player2, String winnerName) {
         this.id = id;
         this.player1 = player1;
         this.player2 = player2;
+        this.winnerName = winnerName;
+    }
+
+    public Matches(Integer player1, Integer player2, String winnerName) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.winnerName = winnerName;
     }
 
     public Integer getId() {
