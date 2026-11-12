@@ -51,7 +51,8 @@ public class MatchesService {
         if (match.winnerName != null) {
             Players players1 = playersService.findPlayerByName(match.getPlayer1().getName());
             Players players2 = playersService.findPlayerByName(match.getPlayer2().getName());
-            matchesRepository.save(new Matches(players1.getId(), players2.getId(), match.winnerName));
+            Players winner = playersService.findPlayerByName(match.winnerName);
+            matchesRepository.save(new Matches(players1, players2, winner));
             matchSession.remove(uuid);
         }
     }

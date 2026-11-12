@@ -1,5 +1,6 @@
 package com.example.tennis.scoreboard.Matches;
 
+import com.example.tennis.scoreboard.Players.Players;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,23 +11,29 @@ public class Matches {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    Integer player1;
+    @ManyToOne
+    @JoinColumn(name = "player1")
+    Players player1;
 
-    Integer player2;
+    @ManyToOne
+    @JoinColumn(name = "player2")
+    Players player2;
 
-    String winnerName;
+    @ManyToOne
+    @JoinColumn(name = "winner")
+    Players winner;
 
-    public Matches(Integer id, Integer player1, Integer player2, String winnerName) {
+    public Matches(Integer id, Players player1, Players player2, Players winner) {
         this.id = id;
         this.player1 = player1;
         this.player2 = player2;
-        this.winnerName = winnerName;
+        this.winner = winner;
     }
 
-    public Matches(Integer player1, Integer player2, String winnerName) {
+    public Matches(Players player1, Players player2, Players winner) {
         this.player1 = player1;
         this.player2 = player2;
-        this.winnerName = winnerName;
+        this.winner = winner;
     }
 
     public Integer getId() {
@@ -37,19 +44,27 @@ public class Matches {
         this.id = id;
     }
 
-    public Integer getPlayer1() {
+    public Players getPlayer1() {
         return player1;
     }
 
-    public void setPlayer1(Integer player1) {
+    public void setPlayer1(Players player1) {
         this.player1 = player1;
     }
 
-    public Integer getPlayer2() {
+    public Players getPlayer2() {
         return player2;
     }
 
-    public void setPlayer2(Integer player2) {
+    public void setPlayer2(Players player2) {
         this.player2 = player2;
+    }
+
+    public Players getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Players winner) {
+        this.winner = winner;
     }
 }
