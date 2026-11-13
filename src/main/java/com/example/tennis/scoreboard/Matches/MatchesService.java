@@ -1,13 +1,14 @@
 package com.example.tennis.scoreboard.Matches;
 
-import com.example.tennis.scoreboard.Matches.dto.ActivePlayerDTO;
-import com.example.tennis.scoreboard.Matches.dto.MatchDTO;
-import com.example.tennis.scoreboard.Matches.dto.MatchDTORequest;
-import com.example.tennis.scoreboard.Matches.dto.MatchInfoDTO;
+import com.example.tennis.scoreboard.Matches.dto.*;
 import com.example.tennis.scoreboard.Players.Players;
 import com.example.tennis.scoreboard.Players.PlayersService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -55,5 +56,15 @@ public class MatchesService {
             matchesRepository.save(new Matches(players1, players2, winner));
             matchSession.remove(uuid);
         }
+    }
+
+    public MatchesDTO allFinishMatches(String playerName, Pageable pageable) {
+        Page<Matches> matches;
+        if (playerName != null) {
+            matches = matchesRepository.findByPlayerName(playerName, pageable);
+            return matchMapper.mapToMatchesDto(matches);
+        }
+        matches = matchesRepository.findAll(pageable);
+        return matchMapper.mapToMatchesDto(matches);
     }
 }

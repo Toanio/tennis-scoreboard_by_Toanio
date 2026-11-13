@@ -23,6 +23,9 @@ public class Matches {
     @JoinColumn(name = "winner")
     Players winner;
 
+    public Matches() {
+    }
+
     public Matches(Integer id, Players player1, Players player2, Players winner) {
         this.id = id;
         this.player1 = player1;
