@@ -5,7 +5,7 @@ public class ActivePlayer {
     private Points points = Points.ZERO;
     private Integer games = 0;
     private Integer sets = 0;
-    private Integer tieBreakPoints = 0;
+    private Integer tieBreakPoints = null;
 
     public ActivePlayer() {
     }

@@ -16,7 +16,7 @@ public class ActiveMatch {
         this.player2 = player2;
 
         if (player1.getGames() == 6 && player2.getGames() == 6) {
-            isTieBreak = true;
+            startTieBreak(player1, player2);
         }
     }
 
@@ -33,38 +33,38 @@ public class ActiveMatch {
     }
 
     private void scoreRegularGame(ActivePlayer player, ActivePlayer opponent) {
-        if (checkDeuce(player, opponent) ) {
+        if (checkDeuce(player, opponent)) {
             player.setPoints(Points.AD);
         } else if (isOpponentAD(opponent)) {
             player.setPoints(Points.FORTY);
             opponent.setPoints(Points.FORTY);
-        } else if (isWinningPoint(player, opponent) || isPlayerAD(player)){
+        } else if (isWinningPoint(player, opponent) || isPlayerAD(player)) {
             player.incrementGames();
-            checkSets(player, opponent);
             resetPoints(player, opponent);
+            checkSets(player, opponent);
         } else {
             player.setPoints();
         }
     }
 
     private void checkSets(ActivePlayer player, ActivePlayer opponent) {
-        if (player.getGames() >= 6 && player.getGames() - opponent.getGames() >= 2){
+        if (player.getGames() >= 6 && player.getGames() - opponent.getGames() >= 2) {
             player.incrementSets();
             checkMatchWinner(player);
             resetGames(player, opponent);
         } else if (player.getGames() == 6 && opponent.getGames() == 6) {
-            isTieBreak = true;
+            startTieBreak(player, opponent);
         }
     }
 
     private void checkTieBreakPoints(ActivePlayer player, ActivePlayer opponent) {
-        if (player.getTieBreakPoints() >= 7 && player.getTieBreakPoints() - opponent.getTieBreakPoints() >= 2 ) {
-            isTieBreak = false;
+        if (player.getTieBreakPoints() >= 7 && player.getTieBreakPoints() - opponent.getTieBreakPoints() >= 2) {
+            stopTieBreak(player, opponent);
             player.incrementSets();
             checkMatchWinner(player);
-            resetPoints(player, opponent);
+            //resetPoints(player, opponent);
             resetGames(player, opponent);
-            resetTieBreakPoints(player, opponent);
+            //resetTieBreakPoints(player, opponent);
         }
     }
 
@@ -93,15 +93,15 @@ public class ActiveMatch {
     }
 
     private ActivePlayer findPlayer(String playerName) {
-        if (playerName.equals(player1.getName())){
+        if (playerName.equals(player1.getName())) {
             return player1;
         }
 
-        if (playerName.equals(player2.getName())){
+        if (playerName.equals(player2.getName())) {
             return player2;
         }
 
-        throw new NoSuchElementException("Player " + playerName +"not found");
+        throw new NoSuchElementException("Player " + playerName + "not found");
     }
 
     private ActivePlayer getOpponent(ActivePlayer player) {
@@ -109,6 +109,30 @@ public class ActiveMatch {
             return player2;
         }
         return player1;
+    }
+
+    public void startTieBreak(ActivePlayer player, ActivePlayer opponent) {
+        isTieBreak = true;
+        player.setPoints(null);
+        opponent.setPoints(null);
+
+        if (player.getTieBreakPoints() == null) {
+            player.setTieBreakPoints(0);
+        }
+
+        if (opponent.getTieBreakPoints() == null) {
+            opponent.setTieBreakPoints(0);
+        }
+    }
+
+    public void stopTieBreak(ActivePlayer player, ActivePlayer opponent) {
+        isTieBreak = false;
+
+        player.setTieBreakPoints(null);
+        player.setPoints(Points.ZERO);
+
+        opponent.setTieBreakPoints(null);
+        opponent.setPoints(Points.ZERO);
     }
 
     public void resetPoints(ActivePlayer player, ActivePlayer opponent) {
