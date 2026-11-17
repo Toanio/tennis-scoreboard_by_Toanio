@@ -4,6 +4,8 @@ import com.example.tennis.scoreboard.Players.dto.PlayersDTO;
 import com.example.tennis.scoreboard.Players.dto.PlayersDTORequest;
 import com.example.tennis.scoreboard.exceptions.MessageDto;
 import com.example.tennis.scoreboard.exceptions.PlayerAlreadyExistsException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,10 +29,9 @@ public class PlayersService {
         return new MessageDto("Player successfully created");
     }
 
-    public List<PlayersDTO> showAllPlayers() {
-        List<Players> players = playersRepository.findAll();
+    public List<PlayersDTO> showAllPlayers(Pageable pageable) {
+        Page<Players> players = playersRepository.findAll(pageable);
         return playersMapper.mapToDto(players);
-        //TODO: сделать экономичный поиск всех игроков
     }
 
     public Players findPlayerByName(String name) {

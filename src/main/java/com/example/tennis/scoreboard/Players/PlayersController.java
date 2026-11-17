@@ -4,6 +4,8 @@ import com.example.tennis.scoreboard.Players.dto.PlayersDTO;
 import com.example.tennis.scoreboard.Players.dto.PlayersDTORequest;
 import com.example.tennis.scoreboard.exceptions.MessageDto;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +28,10 @@ public class PlayersController {
     }
 
     @GetMapping
-    public List<PlayersDTO> showAllPlayers() {
-        return service.showAllPlayers();
+    public List<PlayersDTO> showAllPlayers(
+            Pageable pageable
+    ) {
+        return service.showAllPlayers(pageable);
     }
 
 }
