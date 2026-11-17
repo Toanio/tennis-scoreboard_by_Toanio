@@ -10,8 +10,8 @@ public interface MatchesRepository extends JpaRepository<Matches, Long> {
 
     @Query("""
             SELECT m FROM Matches m 
-            WHERE m.player1.name = :playerName 
-            OR m.player2.name = :playerName
+            WHERE LOWER(m.player1.name) = LOWER(:playerName )
+            OR LOWER(m.player2.name) = LOWER(:playerName)
             """)
     Page<Matches> findByPlayerName(@Param("playerName") String playerName, Pageable pageable);
 

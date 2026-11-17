@@ -1,6 +1,6 @@
 package com.example.tennis.scoreboard.exceptions;
 
-import com.example.tennis.scoreboard.Players.Players;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,9 +18,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(400).body(new MessageDto("Invalid UUID"));
     }
 
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<MessageDto> handleNotFoundMatch(NullPointerException ex) {
-        return ResponseEntity.status(404).body(new MessageDto("Match with this UUID not found"));
+    @ExceptionHandler(MatchNotFoundException.class)
+    public ResponseEntity<MessageDto> handleNotFoundMatch(MatchNotFoundException ex) {
+        return ResponseEntity.status(404).body(new MessageDto(ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -37,6 +37,22 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PlayerAlreadyExistsException.class)
     public ResponseEntity<MessageDto> handleNotFoundMatch(PlayerAlreadyExistsException ex) {
         return ResponseEntity.status(409).body(new MessageDto(ex.getMessage()));
+    }
+
+    @ExceptionHandler(PlayerNotFoundException.class)
+    public ResponseEntity<MessageDto> handleNotFoundMatch(PlayerNotFoundException ex) {
+        return ResponseEntity.status(404).body(new MessageDto(ex.getMessage()));
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<MessageDto> handleConstraintViolation(ConstraintViolationException ex) {
+        String errorMessage = ex.getConstraintViolations()
+                .iterator()
+                .next()
+                .getMessage();
+
+        return ResponseEntity.status(400)
+                .body(new MessageDto(errorMessage));
     }
 
 }

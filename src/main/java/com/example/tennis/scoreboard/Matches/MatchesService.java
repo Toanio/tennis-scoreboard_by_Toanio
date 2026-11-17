@@ -3,12 +3,12 @@ package com.example.tennis.scoreboard.Matches;
 import com.example.tennis.scoreboard.Matches.dto.*;
 import com.example.tennis.scoreboard.Players.Players;
 import com.example.tennis.scoreboard.Players.PlayersService;
+import com.example.tennis.scoreboard.exceptions.MatchNotFoundException;
+import com.example.tennis.scoreboard.exceptions.PlayerNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,6 +30,10 @@ public class MatchesService {
         Players player1 = playersService.findPlayerByName(request.firstPlayerName());
         Players player2 = playersService.findPlayerByName(request.secondPlayerName());
 
+        if (player1 == null || player2 == null) {
+            throw new PlayerNotFoundException("Player not found");
+        }
+
         UUID uuid = UUID.randomUUID();
 
         ActivePlayer activePlayer1 = new ActivePlayer(player1.getName());
@@ -41,8 +45,13 @@ public class MatchesService {
     }
 
     public MatchInfoDTO setPoint(UUID uuid, String name) {
+        Players player = playersService.findPlayerByName(name);
+        if (player == null) {
+            throw new PlayerNotFoundException("Player " + name + "not found");
+
+        }
         ActiveMatch match = matchSession.get(uuid);
-        match.addPoint(name);
+        match.addPoint(player.getName());
         saveFinishMatch(uuid);
         return matchMapper.mapToMatchInfoDto(match);
     }
@@ -66,5 +75,14 @@ public class MatchesService {
         }
         matches = matchesRepository.findAll(pageable);
         return matchMapper.mapToMatchesDto(matches);
+    }
+
+    public MatchInfoDTO getMatchScore(UUID uuid) {
+        ActiveMatch match = matchSession.get(uuid);
+        if (match == null) {
+            throw new MatchNotFoundException("Match with this UUID not found");
+        }
+        return matchMapper.mapToMatchInfoDto(match);
+        //TODO: сделать tieBreakPoints=null и point=null
     }
 }
