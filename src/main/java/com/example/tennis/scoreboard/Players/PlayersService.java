@@ -2,6 +2,8 @@ package com.example.tennis.scoreboard.Players;
 
 import com.example.tennis.scoreboard.Players.dto.PlayersDTO;
 import com.example.tennis.scoreboard.Players.dto.PlayersDTORequest;
+import com.example.tennis.scoreboard.exceptions.MessageDto;
+import com.example.tennis.scoreboard.exceptions.PlayerAlreadyExistsException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +18,13 @@ public class PlayersService {
         this.playersMapper = playersMapper;
     }
 
-    public void createPlayer(PlayersDTORequest request) {
-        Players findPlayer = playersRepository.findByName(request.name());
+    public MessageDto createPlayer(PlayersDTORequest request) {
+        Players findPlayer = playersRepository.findByNameIgnoreCase(request.name());
         if (findPlayer != null) {
-            throw new IllegalArgumentException("Players already exist");
-            //TODO: сделать проверку на пустое поле с правильной ошибкой
+            throw new PlayerAlreadyExistsException("Players already exist");
         }
         playersRepository.save(new Players(request.name()));
-        //TODO: сделать проаверку уникальности игроков
+        return new MessageDto("Player successfully created");
     }
 
     public List<PlayersDTO> showAllPlayers() {
@@ -33,7 +34,7 @@ public class PlayersService {
     }
 
     public Players findPlayerByName(String name) {
-        return playersRepository.findByName(name);
+        return playersRepository.findByNameIgnoreCase(name);
     }
 
 }
