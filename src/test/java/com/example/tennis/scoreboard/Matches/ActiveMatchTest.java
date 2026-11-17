@@ -84,6 +84,17 @@ public class ActiveMatchTest {
     }
 
     @Test
+    public void checkPointsNull() {
+        ActivePlayer player1 = new ActivePlayer("Oleg", Points.FORTY, 6, 0, 1);
+        ActivePlayer player2 = new ActivePlayer("Anton", Points.FIFTEEN, 6, 0, 3);
+        match = new ActiveMatch(player1, player2);
+        match.addPoint("Oleg");
+
+        Assertions.assertNull(player1.getPoints());
+        Assertions.assertNull(player2.getPoints());
+    }
+
+    @Test
     public void checkLongTieBreakPoints() {
         ActivePlayer player1 = new ActivePlayer("Oleg", Points.FORTY, 6, 0, 6);
         ActivePlayer player2 = new ActivePlayer("Anton", Points.FIFTEEN, 6, 0, 6);
