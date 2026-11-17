@@ -1,7 +1,5 @@
 package com.example.tennis.scoreboard.Matches;
 
-import com.example.tennis.scoreboard.Players.Players;
-
 import java.util.NoSuchElementException;
 
 public class ActiveMatch {

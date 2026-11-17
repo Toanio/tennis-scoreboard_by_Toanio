@@ -6,4 +6,3 @@ public record FinishedMatchDTO(
         String winnerName
 ) {
 }
-//TODO: переделать нейминг dto

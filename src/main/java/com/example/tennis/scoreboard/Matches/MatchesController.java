@@ -1,9 +1,11 @@
 package com.example.tennis.scoreboard.Matches;
 
-import com.example.tennis.scoreboard.Matches.dto.*;
+import com.example.tennis.scoreboard.Matches.dto.MatchDTORequest;
+import com.example.tennis.scoreboard.Matches.dto.MatchDTOResponse;
+import com.example.tennis.scoreboard.Matches.dto.MatchInfoDTO;
+import com.example.tennis.scoreboard.Matches.dto.MatchesDTO;
 import com.example.tennis.scoreboard.Players.dto.PlayersDTORequest;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.domain.Pageable;
@@ -11,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -43,7 +43,6 @@ public class MatchesController {
     @GetMapping
     public ResponseEntity<MatchesDTO> getFinishedMatches(
             @RequestParam(required = false, name = "player_name")
-            @NotBlank(message = "playerName cannot be blank")
             @Size(min = 2, max = 30, message = "Player name must be between 2 and 30 characters")
             @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9]+$", message = "Player name must not contain special characters")
             String playerName,

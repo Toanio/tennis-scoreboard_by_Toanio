@@ -83,6 +83,5 @@ public class MatchesService {
             throw new MatchNotFoundException("Match with this UUID not found");
         }
         return matchMapper.mapToMatchInfoDto(match);
-        //TODO: сделать tieBreakPoints=null и point=null
     }
 }
