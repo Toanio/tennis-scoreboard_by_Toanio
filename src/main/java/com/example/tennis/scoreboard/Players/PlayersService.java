@@ -7,6 +7,7 @@ import com.example.tennis.scoreboard.exceptions.PlayerAlreadyExistsException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class PlayersService {
         this.playersMapper = playersMapper;
     }
 
+    @Transactional
     public MessageDto createPlayer(PlayersDTORequest request) {
         Players findPlayer = playersRepository.findByNameIgnoreCase(request.name());
         if (findPlayer != null) {
@@ -29,6 +31,7 @@ public class PlayersService {
         return new MessageDto("Player successfully created");
     }
 
+    @Transactional(readOnly = true)
     public List<PlayersDTO> showAllPlayers(Pageable pageable) {
         Page<Players> players = playersRepository.findAll(pageable);
         return playersMapper.mapToDto(players);

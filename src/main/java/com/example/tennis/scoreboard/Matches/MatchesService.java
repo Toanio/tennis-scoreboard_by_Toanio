@@ -9,6 +9,7 @@ import com.example.tennis.scoreboard.exceptions.PlayersNotEqualsException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -60,6 +61,7 @@ public class MatchesService {
         return matchMapper.mapToMatchInfoDto(match);
     }
 
+    @Transactional
     public void saveFinishMatch(UUID uuid) {
         ActiveMatch match = getActiveMatch(uuid);
         if (match.winnerName != null) {
@@ -71,6 +73,7 @@ public class MatchesService {
         }
     }
 
+    @Transactional(readOnly = true)
     public MatchesDTO allFinishMatches(String playerName, Pageable pageable) {
         Page<Matches> matches;
         if (playerName != null) {
