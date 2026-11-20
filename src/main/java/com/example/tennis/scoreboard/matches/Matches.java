@@ -1,6 +1,6 @@
-package com.example.tennis.scoreboard.Matches;
+package com.example.tennis.scoreboard.matches;
 
-import com.example.tennis.scoreboard.Players.Players;
+import com.example.tennis.scoreboard.players.Players;
 import jakarta.persistence.*;
 
 @Entity

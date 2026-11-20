@@ -1,6 +1,6 @@
-package com.example.tennis.scoreboard.Players;
+package com.example.tennis.scoreboard.players;
 
-import com.example.tennis.scoreboard.Players.dto.PlayersDTO;
+import com.example.tennis.scoreboard.players.dto.PlayersDTO;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 

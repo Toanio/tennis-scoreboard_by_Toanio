@@ -1,8 +1,8 @@
-package com.example.tennis.scoreboard.Matches;
+package com.example.tennis.scoreboard.matches;
 
-import com.example.tennis.scoreboard.Matches.dto.*;
-import com.example.tennis.scoreboard.Players.Players;
-import com.example.tennis.scoreboard.Players.PlayersService;
+import com.example.tennis.scoreboard.matches.dto.*;
+import com.example.tennis.scoreboard.players.Players;
+import com.example.tennis.scoreboard.players.PlayersService;
 import com.example.tennis.scoreboard.exceptions.MatchNotFoundException;
 import com.example.tennis.scoreboard.exceptions.PlayerNotFoundException;
 import com.example.tennis.scoreboard.exceptions.PlayersNotEqualsException;

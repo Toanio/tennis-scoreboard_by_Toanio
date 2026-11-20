@@ -1,10 +1,10 @@
-package com.example.tennis.scoreboard.Matches;
+package com.example.tennis.scoreboard.matches;
 
-import com.example.tennis.scoreboard.Matches.dto.MatchDTORequest;
-import com.example.tennis.scoreboard.Matches.dto.MatchDTOResponse;
-import com.example.tennis.scoreboard.Matches.dto.MatchInfoDTO;
-import com.example.tennis.scoreboard.Matches.dto.MatchesDTO;
-import com.example.tennis.scoreboard.Players.dto.PlayersDTORequest;
+import com.example.tennis.scoreboard.matches.dto.MatchDTORequest;
+import com.example.tennis.scoreboard.matches.dto.MatchDTOResponse;
+import com.example.tennis.scoreboard.matches.dto.MatchInfoDTO;
+import com.example.tennis.scoreboard.matches.dto.MatchesDTO;
+import com.example.tennis.scoreboard.players.dto.PlayersDTORequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

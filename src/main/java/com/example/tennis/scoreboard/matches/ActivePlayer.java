@@ -1,4 +1,4 @@
-package com.example.tennis.scoreboard.Matches;
+package com.example.tennis.scoreboard.matches;
 
 public class ActivePlayer {
     private String name;

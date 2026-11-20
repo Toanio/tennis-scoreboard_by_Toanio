@@ -1,4 +1,4 @@
-package com.example.tennis.scoreboard.Players.dto;
+package com.example.tennis.scoreboard.players.dto;
 
 public record PlayersDTO(
         Integer id,

@@ -1,6 +1,6 @@
-package com.example.tennis.scoreboard.Matches;
+package com.example.tennis.scoreboard.matches;
 
-import com.example.tennis.scoreboard.Matches.dto.ActivePlayerDTO;
+import com.example.tennis.scoreboard.matches.dto.ActivePlayerDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

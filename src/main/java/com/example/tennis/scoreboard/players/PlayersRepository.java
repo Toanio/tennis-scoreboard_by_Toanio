@@ -1,4 +1,4 @@
-package com.example.tennis.scoreboard.Players;
+package com.example.tennis.scoreboard.players;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

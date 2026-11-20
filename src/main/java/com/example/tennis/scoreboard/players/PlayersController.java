@@ -1,7 +1,7 @@
-package com.example.tennis.scoreboard.Players;
+package com.example.tennis.scoreboard.players;
 
-import com.example.tennis.scoreboard.Players.dto.PlayersDTO;
-import com.example.tennis.scoreboard.Players.dto.PlayersDTORequest;
+import com.example.tennis.scoreboard.players.dto.PlayersDTO;
+import com.example.tennis.scoreboard.players.dto.PlayersDTORequest;
 import com.example.tennis.scoreboard.exceptions.MessageDto;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;

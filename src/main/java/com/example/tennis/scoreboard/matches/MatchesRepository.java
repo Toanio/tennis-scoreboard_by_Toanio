@@ -1,4 +1,4 @@
-package com.example.tennis.scoreboard.Matches;
+package com.example.tennis.scoreboard.matches;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

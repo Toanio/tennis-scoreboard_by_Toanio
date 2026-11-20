@@ -1,8 +1,8 @@
-package com.example.tennis.scoreboard.Matches;
+package com.example.tennis.scoreboard.matches;
 
-import com.example.tennis.scoreboard.Matches.dto.FinishedMatchDTO;
-import com.example.tennis.scoreboard.Matches.dto.MatchInfoDTO;
-import com.example.tennis.scoreboard.Matches.dto.MatchesDTO;
+import com.example.tennis.scoreboard.matches.dto.FinishedMatchDTO;
+import com.example.tennis.scoreboard.matches.dto.MatchInfoDTO;
+import com.example.tennis.scoreboard.matches.dto.MatchesDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;

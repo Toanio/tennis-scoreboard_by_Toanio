@@ -1,4 +1,4 @@
-package com.example.tennis.scoreboard.Matches.dto;
+package com.example.tennis.scoreboard.matches.dto;
 
 import java.util.UUID;
 
