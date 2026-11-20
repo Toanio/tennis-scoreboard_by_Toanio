@@ -14,12 +14,12 @@ import java.util.List;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<MessageDto> handleWrongArgument(MethodArgumentTypeMismatchException ex) {
+    public ResponseEntity<MessageDto> handleWrongUUID(MethodArgumentTypeMismatchException ex) {
         return ResponseEntity.status(400).body(new MessageDto("Invalid UUID"));
     }
 
     @ExceptionHandler(MatchNotFoundException.class)
-    public ResponseEntity<MessageDto> handleNotFoundMatch(MatchNotFoundException ex) {
+    public ResponseEntity<MessageDto> handlePlayerAlreadyExists(MatchNotFoundException ex) {
         return ResponseEntity.status(404).body(new MessageDto(ex.getMessage()));
     }
 
@@ -35,12 +35,12 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(PlayerAlreadyExistsException.class)
-    public ResponseEntity<MessageDto> handleNotFoundMatch(PlayerAlreadyExistsException ex) {
+    public ResponseEntity<MessageDto> handlePlayerAlreadyExists(PlayerAlreadyExistsException ex) {
         return ResponseEntity.status(409).body(new MessageDto(ex.getMessage()));
     }
 
     @ExceptionHandler(PlayerNotFoundException.class)
-    public ResponseEntity<MessageDto> handleNotFoundMatch(PlayerNotFoundException ex) {
+    public ResponseEntity<MessageDto> handlePlayerNotFound(PlayerNotFoundException ex) {
         return ResponseEntity.status(404).body(new MessageDto(ex.getMessage()));
     }
 
