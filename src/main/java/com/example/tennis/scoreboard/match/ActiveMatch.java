@@ -97,7 +97,7 @@ public class ActiveMatch {
             return player2;
         }
 
-        throw new PlayerNotFoundException("Player " + playerName + "not found");
+        throw new PlayerNotFoundException("Player " + playerName + " not found");
     }
 
     private ActivePlayer getOpponent(ActivePlayer player) {
