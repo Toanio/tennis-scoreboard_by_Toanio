@@ -1,6 +1,6 @@
 package com.example.tennis.scoreboard.match;
 
-import java.util.NoSuchElementException;
+import com.example.tennis.scoreboard.exception.PlayerNotFoundException;
 
 public class ActiveMatch {
     private final ActivePlayer player1;
@@ -60,9 +60,7 @@ public class ActiveMatch {
             stopTieBreak(player, opponent);
             player.incrementSets();
             checkMatchWinner(player);
-            //resetPoints(player, opponent);
             resetGames(player, opponent);
-            //resetTieBreakPoints(player, opponent);
         }
     }
 
@@ -99,7 +97,7 @@ public class ActiveMatch {
             return player2;
         }
 
-        throw new NoSuchElementException("Player " + playerName + "not found");
+        throw new PlayerNotFoundException("Player " + playerName + "not found");
     }
 
     private ActivePlayer getOpponent(ActivePlayer player) {
