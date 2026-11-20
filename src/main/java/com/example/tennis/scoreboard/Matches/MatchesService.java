@@ -5,6 +5,7 @@ import com.example.tennis.scoreboard.Players.Players;
 import com.example.tennis.scoreboard.Players.PlayersService;
 import com.example.tennis.scoreboard.exceptions.MatchNotFoundException;
 import com.example.tennis.scoreboard.exceptions.PlayerNotFoundException;
+import com.example.tennis.scoreboard.exceptions.PlayersNotEqualsException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class MatchesService {
 
 
     public UUID createMatch(MatchDTORequest request) {
+        if (request.firstPlayerName().equals(request.secondPlayerName())) {
+            throw new PlayersNotEqualsException("Players name cannot be equals");
+        }
         Players player1 = playersService.findPlayerByName(request.firstPlayerName());
         Players player2 = playersService.findPlayerByName(request.secondPlayerName());
 

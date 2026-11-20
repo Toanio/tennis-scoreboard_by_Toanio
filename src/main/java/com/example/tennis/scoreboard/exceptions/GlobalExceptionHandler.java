@@ -55,4 +55,9 @@ public class GlobalExceptionHandler {
                 .body(new MessageDto(errorMessage));
     }
 
+    @ExceptionHandler(PlayersNotEqualsException.class)
+    public ResponseEntity<MessageDto> handlePlayerNotEquals(PlayersNotEqualsException ex) {
+        return ResponseEntity.status(409).body(new MessageDto(ex.getMessage()));
+    }
+
 }
