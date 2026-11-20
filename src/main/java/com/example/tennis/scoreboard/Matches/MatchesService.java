@@ -54,14 +54,14 @@ public class MatchesService {
             throw new PlayerNotFoundException("Player " + name + "not found");
 
         }
-        ActiveMatch match = matchSession.get(uuid);
+        ActiveMatch match = getActiveMatch(uuid);
         match.addPoint(player.getName());
         saveFinishMatch(uuid);
         return matchMapper.mapToMatchInfoDto(match);
     }
 
     public void saveFinishMatch(UUID uuid) {
-        ActiveMatch match = matchSession.get(uuid);
+        ActiveMatch match = getActiveMatch(uuid);
         if (match.winnerName != null) {
             Players players1 = playersService.findPlayerByName(match.getPlayer1().getName());
             Players players2 = playersService.findPlayerByName(match.getPlayer2().getName());
@@ -82,10 +82,15 @@ public class MatchesService {
     }
 
     public MatchInfoDTO getMatchScore(UUID uuid) {
+        ActiveMatch match = getActiveMatch(uuid);
+        return matchMapper.mapToMatchInfoDto(match);
+    }
+
+    private ActiveMatch getActiveMatch(UUID uuid) {
         ActiveMatch match = matchSession.get(uuid);
         if (match == null) {
             throw new MatchNotFoundException("Match with this UUID not found");
         }
-        return matchMapper.mapToMatchInfoDto(match);
+        return match;
     }
 }
