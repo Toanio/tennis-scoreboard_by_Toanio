@@ -29,7 +29,10 @@ public class MatchService {
 
 
     public UUID createMatch(MatchDTORequest request) {
-        if (request.firstPlayerName().equals(request.secondPlayerName())) {
+        String firstName = request.firstPlayerName().trim();
+        String secondName = request.secondPlayerName().trim();
+
+        if (firstName.equals(secondName)) {
             throw new PlayersNotEqualsException("Players name cannot be equals");
         }
         Player player1 = playerService.findPlayerByName(request.firstPlayerName());
