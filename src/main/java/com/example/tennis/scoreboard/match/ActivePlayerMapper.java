@@ -7,6 +7,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ActivePlayerMapper {
 
-    @Mapping(target = "points", expression = "java(player.getPoints().getDisplayValue())")
+    @Mapping(target = "points", expression = "java(Points.toDisplayValue(player.getPoints()))")
     ActivePlayerDTO mapToDto(ActivePlayer player);
 }

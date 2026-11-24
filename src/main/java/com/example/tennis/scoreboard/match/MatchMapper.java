@@ -30,6 +30,4 @@ public interface MatchMapper {
                 matches.getNumber(),
                 matches.getTotalPages());
     }
-
-    //List<MatchesDTO> mapToMatchesDto(List<FinishedMatchDTO> matches);
 }

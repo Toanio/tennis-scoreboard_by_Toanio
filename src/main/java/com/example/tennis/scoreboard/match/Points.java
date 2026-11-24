@@ -13,7 +13,7 @@ public enum Points {
         this.displayValue = displayValue;
     }
 
-    public String getDisplayValue() {
-        return displayValue;
+    public static String toDisplayValue(Points points) {
+        return points != null ? points.displayValue : null; // или "0" / null
     }
 }
