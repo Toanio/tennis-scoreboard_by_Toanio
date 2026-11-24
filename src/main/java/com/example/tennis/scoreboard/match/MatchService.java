@@ -64,7 +64,11 @@ public class MatchService {
         }
         ActiveMatch match = getActiveMatch(uuid);
         match.addPoint(player.getName());
-        saveFinishMatch(uuid);
+
+        if (match.getWinnerName() != null) {
+            saveFinishMatch(uuid);
+        }
+
         return matchMapper.mapToMatchInfoDto(match);
     }
 
@@ -76,7 +80,6 @@ public class MatchService {
             Player player2 = playerService.findPlayerByName(match.getPlayer2().getName());
             Player winner = playerService.findPlayerByName(match.winnerName);
             matchRepository.save(new Match(player1, player2, winner));
-            matchSession.remove(uuid);
         }
     }
 

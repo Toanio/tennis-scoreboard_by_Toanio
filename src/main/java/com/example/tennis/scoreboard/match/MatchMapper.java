@@ -13,6 +13,7 @@ import java.util.List;
 public interface MatchMapper {
     @Mapping(source = "player1", target = "firstPlayer")
     @Mapping(source = "player2", target = "secondPlayer")
+    @Mapping(source = "winnerName", target = "winnerName")
     MatchInfoDTO mapToMatchInfoDto(ActiveMatch activeMatch);
 
     @Mapping(source = "player1.name", target = "firstPlayerName")

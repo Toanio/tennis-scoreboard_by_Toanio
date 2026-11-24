@@ -141,16 +141,15 @@ public class ActiveMatch {
         opponent.resetGames();
     }
 
-    public void resetTieBreakPoints(ActivePlayer player, ActivePlayer opponent) {
-        player.resetTieBreakPoints();
-        opponent.resetTieBreakPoints();
-    }
-
     public ActivePlayer getPlayer1() {
         return player1;
     }
 
     public ActivePlayer getPlayer2() {
         return player2;
+    }
+
+    public String getWinnerName() {
+        return winnerName;
     }
 }
