@@ -31,6 +31,15 @@ public class PlayerService {
         return new MessageDto("Player successfully created");
     }
 
+    @Transactional
+    public Player createPlayerByName(String name) {
+        Player findPlayer = playerRepository.findByNameIgnoreCase(name);
+        if (findPlayer != null) {
+            throw new PlayerAlreadyExistsException("Players already exist");
+        }
+        return playerRepository.save(new Player(name));
+    }
+
     @Transactional(readOnly = true)
     public List<PlayersDTO> showAllPlayers(Pageable pageable) {
         Page<Player> players = playerRepository.findAll(pageable);

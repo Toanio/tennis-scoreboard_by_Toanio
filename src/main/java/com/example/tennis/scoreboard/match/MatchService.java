@@ -32,14 +32,18 @@ public class MatchService {
         String firstName = request.firstPlayerName().trim();
         String secondName = request.secondPlayerName().trim();
 
-        if (firstName.equals(secondName)) {
+        if (firstName.equalsIgnoreCase(secondName)) {
             throw new PlayersNotEqualsException("Players name cannot be equals");
         }
-        Player player1 = playerService.findPlayerByName(request.firstPlayerName());
-        Player player2 = playerService.findPlayerByName(request.secondPlayerName());
+        Player player1 = playerService.findPlayerByName(firstName);
+        Player player2 = playerService.findPlayerByName(secondName);
 
-        if (player1 == null || player2 == null) {
-            throw new PlayerNotFoundException("Player not found");
+        if (player1 == null) {
+            player1 = playerService.createPlayerByName(firstName);
+        }
+
+        if (player2 == null) {
+            player2 = playerService.createPlayerByName(secondName);
         }
 
         UUID uuid = UUID.randomUUID();
